@@ -289,6 +289,8 @@ canvas {
 
 .controls.dpad {
   width: max-content;
+  margin-left: auto;
+  margin-right: auto;
   padding: 6px;
   border-radius: 12px;
   background: rgba(10, 45, 28, 0.65);
