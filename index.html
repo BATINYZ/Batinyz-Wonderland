@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GOKTURK BATUHAN KACIN - Jungle Snake</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <header class="top-banner">
+        <div class="vine vine-left"></div>
+        <h1>GOKTURK BATUHAN KACIN</h1>
+        <div class="vine vine-right"></div>
+      </header>
+
+      <div class="playfield-wrap">
+        <aside class="tree tree-left">
+          <div class="monkey monkey-a">🐵👏</div>
+          <div class="monkey monkey-b">🐒👏</div>
+        </aside>
+
+        <main class="board-area">
+          <canvas id="game" width="480" height="480" aria-label="Snake game"></canvas>
+          <div class="hud">
+            <div id="score">Skor: 0</div>
+            <div id="status">Basla: Ok tuslari veya asagidaki tuslar</div>
+          </div>
+
+          <div class="controls" aria-label="Mobile controls">
+            <button data-dir="up">▲</button>
+            <div class="row">
+              <button data-dir="left">◀</button>
+              <button data-dir="down">▼</button>
+              <button data-dir="right">▶</button>
+            </div>
+          </div>
+        </main>
+
+        <aside class="tree tree-right">
+          <div class="monkey monkey-c">🐵👏</div>
+          <div class="monkey monkey-d">🐒👏</div>
+        </aside>
+      </div>
+    </div>
+    <script src="game.js"></script>
+  </body>
+</html>
+

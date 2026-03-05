@@ -1,17 +1,29 @@
-# Snake Game (Python + Pygame)
+# Snake Game (Web + Python)
 
-## Requirements
+## Play On Phone (WhatsApp Link)
+
+Bu oyunu telefondan oynatmak icin bu linki paylas:
+
+`https://batinyz.github.io/Batinyz-Wonderland/`
+
+Not: Link ilk kez acilmiyorsa repo ayarlarindan `Settings -> Pages -> Deploy from a branch -> master/(root)` sec.
+
+## Web Run (Local)
+
+`index.html` dosyasini tarayicida ac.
+
+## Python Requirements
 
 - Python 3.10+
-- `pygame-ce` (import adı `pygame`)
+- `pygame-ce` (import adi `pygame`)
 
-## Install
+## Python Install
 
 ```bash
 python -m pip install -r requirements.txt
 ```
 
-## Run
+## Python Run
 
 ```bash
 python -m src.main
@@ -20,11 +32,5 @@ python -m src.main
 ## Controls
 
 - Arrow keys: move snake
-- `R`: restart after game over
-- `Q` or `Esc`: quit
-
-## Rules
-
-- Eat food to grow and increase score.
-- Every 5 points, speed increases.
-- Hitting walls or your own body ends the game.
+- `R`: restart after game over (Python version)
+- `Q` or `Esc`: quit (Python version)
