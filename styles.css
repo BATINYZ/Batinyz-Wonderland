@@ -288,25 +288,35 @@ canvas {
 }
 
 .controls.dpad {
+  width: max-content;
   padding: 6px;
   border-radius: 12px;
   background: rgba(10, 45, 28, 0.65);
   border: 1px solid #8ed462;
 }
 
-.controls .empty {
-  border: 0;
-  background: transparent;
-  pointer-events: none;
-}
-
-.controls .empty.center {
-  border-radius: 10px;
-  background: rgba(184, 224, 112, 0.22);
-}
-
 .controls button:active {
   transform: scale(0.96);
+}
+
+.controls .btn-up {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.controls .btn-left {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.controls .btn-right {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.controls .btn-down {
+  grid-column: 2;
+  grid-row: 3;
 }
 
 .board-decor {
