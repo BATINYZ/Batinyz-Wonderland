@@ -170,6 +170,9 @@ body {
 }
 
 .board-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 10px;
   border-radius: 18px;
   background: linear-gradient(180deg, var(--jungle-2), var(--jungle-1));
@@ -235,6 +238,7 @@ canvas {
 }
 
 .hud {
+  width: min(92vw, 560px);
   margin-top: 8px;
   padding: 8px;
   border-radius: 12px;
@@ -272,6 +276,8 @@ canvas {
   grid-template-rows: repeat(3, 46px);
   gap: 6px;
   justify-content: center;
+  justify-items: center;
+  align-self: center;
   position: relative;
   z-index: 2;
 }
@@ -289,8 +295,7 @@ canvas {
 
 .controls.dpad {
   width: max-content;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 10px auto 0 auto;
   padding: 6px;
   border-radius: 12px;
   background: rgba(10, 45, 28, 0.65);
