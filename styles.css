@@ -267,9 +267,10 @@ canvas {
 
 .controls {
   margin-top: 10px;
-  display: inline-flex;
+  display: grid;
+  grid-template-columns: repeat(3, 62px);
+  grid-template-rows: repeat(3, 46px);
   gap: 6px;
-  flex-wrap: wrap;
   justify-content: center;
   position: relative;
   z-index: 2;
@@ -288,6 +289,26 @@ canvas {
 
 .controls button:active {
   transform: scale(0.96);
+}
+
+.controls .btn-up {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.controls .btn-left {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.controls .btn-right {
+  grid-column: 3;
+  grid-row: 2;
+}
+
+.controls .btn-down {
+  grid-column: 2;
+  grid-row: 3;
 }
 
 .board-decor {
