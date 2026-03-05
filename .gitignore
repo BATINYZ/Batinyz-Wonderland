@@ -6,4 +6,7 @@ venv/
 .env
 .DS_Store
 Thumbs.db
-
+build/
+dist/
+*.spec
+codex_smoke_test.txt
