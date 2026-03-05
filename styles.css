@@ -179,6 +179,7 @@ body {
 
 .canvas-wrap {
   position: relative;
+  padding-top: 46px;
 }
 
 canvas {
@@ -270,6 +271,8 @@ canvas {
   gap: 6px;
   flex-wrap: wrap;
   justify-content: center;
+  position: relative;
+  z-index: 2;
 }
 
 .controls button {
@@ -287,12 +290,78 @@ canvas {
   transform: scale(0.96);
 }
 
+.board-decor {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.board-decor.top {
+  top: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.board-decor.left {
+  left: -62px;
+  top: 48%;
+  transform: translateY(-50%);
+  flex-direction: column;
+}
+
+.board-decor.right {
+  right: -62px;
+  top: 48%;
+  transform: translateY(-50%);
+  flex-direction: column;
+}
+
+.controls-decor {
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.mini-tree {
+  width: 26px;
+  height: 36px;
+  position: relative;
+  background: linear-gradient(180deg, #7f4f2a, #5d3718);
+  border-radius: 6px;
+}
+
+.mini-tree::before {
+  content: "";
+  position: absolute;
+  width: 34px;
+  height: 24px;
+  border-radius: 60%;
+  background: radial-gradient(circle, #84ce58, #2f7d3f 70%);
+  left: -4px;
+  top: -14px;
+}
+
+.mini-monkey {
+  font-size: 20px;
+  display: inline-block;
+  animation: clap 0.55s infinite alternate ease-in-out;
+}
+
 @media (max-width: 760px) {
   .playfield-wrap {
     grid-template-columns: 1fr;
   }
 
   .tree {
+    display: none;
+  }
+
+  .board-decor.left,
+  .board-decor.right {
     display: none;
   }
 }

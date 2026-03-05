@@ -18,6 +18,12 @@ let food;
 let gameOver;
 let score;
 let started = false;
+let audioCtx;
+let musicTimer;
+let noteIndex = 0;
+
+const melody = [523.25, 659.25, 783.99, 659.25, 523.25, 659.25, 880.0, 783.99];
+const bass = [130.81, 146.83, 164.81, 146.83];
 
 function reset() {
   snake = [{ x: 12, y: 12 }];
@@ -116,6 +122,7 @@ function update() {
     gameOver = true;
     statusEl.textContent = "Bitti! Restart ile yeniden baslayabilirsin.";
     restartBtn.classList.add("show");
+    deathSound();
     return;
   }
 
@@ -139,7 +146,47 @@ function draw() {
   snake.forEach((part, i) => drawCell(part.x, part.y, i === 0 ? "#dbff84" : "#93e65e"));
 }
 
+function tone(freq, duration, type = "square", volume = 0.03, when = 0) {
+  if (!audioCtx) return;
+  const t0 = audioCtx.currentTime + when;
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = type;
+  osc.frequency.value = freq;
+  gain.gain.setValueAtTime(volume, t0);
+  gain.gain.exponentialRampToValueAtTime(0.0001, t0 + duration);
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+  osc.start(t0);
+  osc.stop(t0 + duration);
+}
+
+function initAudio() {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  if (audioCtx.state === "suspended") audioCtx.resume();
+}
+
+function startMusic() {
+  if (musicTimer) clearInterval(musicTimer);
+  musicTimer = setInterval(() => {
+    const m = melody[noteIndex % melody.length];
+    const b = bass[noteIndex % bass.length];
+    tone(m, 0.14, "square", 0.03, 0);
+    tone(b, 0.18, "triangle", 0.02, 0.01);
+    noteIndex += 1;
+  }, 210);
+}
+
+function deathSound() {
+  if (!audioCtx) return;
+  tone(420, 0.2, "sawtooth", 0.04, 0.0);
+  tone(300, 0.25, "sawtooth", 0.04, 0.18);
+  tone(180, 0.35, "triangle", 0.045, 0.4);
+}
+
 function startGame() {
+  initAudio();
+  startMusic();
   started = true;
   introOverlay.classList.add("hidden");
   statusEl.textContent = "Oyun basladi!";
