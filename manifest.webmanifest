@@ -1,0 +1,19 @@
+﻿{
+  "name": "gokturk batuhan cagla kacin - Jungle Snake",
+  "short_name": "Jungle Snake",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#163f2c",
+  "theme_color": "#1f6f3a",
+  "description": "Amazon temali mobil Snake oyunu.",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

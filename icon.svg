@@ -1,0 +1,23 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Jungle Snake">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3a8b4b"/>
+      <stop offset="1" stop-color="#1a4f32"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="96" fill="url(#bg)"/>
+  <circle cx="120" cy="116" r="62" fill="#5fb267" opacity="0.55"/>
+  <circle cx="408" cy="118" r="56" fill="#69c05f" opacity="0.5"/>
+  <g fill="#8fe064">
+    <rect x="86" y="274" width="70" height="70" rx="16"/>
+    <rect x="156" y="274" width="70" height="70" rx="16"/>
+    <rect x="226" y="274" width="70" height="70" rx="16"/>
+    <rect x="296" y="274" width="70" height="70" rx="16"/>
+  </g>
+  <rect x="296" y="204" width="70" height="70" rx="16" fill="#d9ff8d"/>
+  <circle cx="346" cy="224" r="7" fill="#1b2e1f"/>
+  <circle cx="346" cy="254" r="7" fill="#1b2e1f"/>
+  <path d="M365 239h38" stroke="#ff8a9a" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="420" cy="322" r="20" fill="#ff7e54"/>
+  <path d="M408 320h24" stroke="#2b7043" stroke-width="7" stroke-linecap="round"/>
+</svg>
