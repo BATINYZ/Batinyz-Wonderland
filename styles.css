@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --leaf-1: #b4e23e;
   --leaf-2: #4cae3f;
   --leaf-3: #1f6f3a;
@@ -19,7 +19,10 @@ body {
   margin: 0;
   font-family: "Trebuchet MS", "Segoe UI", sans-serif;
   color: var(--text);
-  background: radial-gradient(circle at top, #4f9158 0%, var(--jungle-1) 60%, #0f2a1d 100%);
+  background:
+    radial-gradient(circle at 10% 10%, rgba(120, 190, 84, 0.5), transparent 35%),
+    radial-gradient(circle at 90% 20%, rgba(95, 165, 72, 0.45), transparent 30%),
+    linear-gradient(180deg, #345f3d 0%, var(--jungle-1) 62%, #0f2a1d 100%);
   min-height: 100vh;
 }
 
@@ -83,14 +86,9 @@ body {
 .tree {
   position: relative;
   border-radius: 18px;
-  background:
-    repeating-linear-gradient(
-      90deg,
-      var(--wood) 0 12px,
-      var(--wood-dark) 12px 19px
-    );
+  background: repeating-linear-gradient(90deg, var(--wood) 0 12px, var(--wood-dark) 12px 19px);
   border: 2px solid #8d5b2d;
-  min-height: 620px;
+  min-height: 690px;
   overflow: hidden;
 }
 
@@ -100,34 +98,65 @@ body {
   top: 0;
   left: 0;
   right: 0;
-  height: 90px;
+  height: 95px;
   background: radial-gradient(circle at center, #68b651, #2f7d3f 70%);
+}
+
+.branch {
+  position: absolute;
+  width: 58px;
+  height: 9px;
+  background: #6b3f1d;
+  border-radius: 7px;
+}
+
+.branch-a {
+  top: 155px;
+  right: 8px;
+}
+
+.branch-b {
+  top: 315px;
+  right: 8px;
+}
+
+.branch-c {
+  top: 205px;
+  left: 8px;
+}
+
+.branch-d {
+  top: 365px;
+  left: 8px;
 }
 
 .monkey {
   position: absolute;
-  left: 12px;
-  font-size: 28px;
+  font-size: 29px;
   transform-origin: center;
   animation: clap 0.55s infinite alternate ease-in-out;
   user-select: none;
 }
 
 .monkey-a {
-  top: 130px;
+  top: 126px;
+  right: 10px;
 }
 
 .monkey-b {
-  top: 280px;
+  top: 286px;
+  right: 10px;
   animation-delay: 0.2s;
 }
 
 .monkey-c {
-  top: 180px;
+  top: 176px;
+  left: 10px;
 }
 
 .monkey-d {
-  top: 340px;
+  top: 336px;
+  left: 10px;
   animation-delay: 0.3s;
 }
 
@@ -136,7 +165,7 @@ body {
     transform: rotate(-6deg) scale(1);
   }
   to {
-    transform: rotate(6deg) scale(1.09);
+    transform: rotate(7deg) scale(1.09);
   }
 }
 
@@ -148,6 +177,10 @@ body {
   text-align: center;
 }
 
+.canvas-wrap {
+  position: relative;
+}
+
 canvas {
   width: min(92vw, 560px);
   height: min(92vw, 560px);
@@ -157,6 +190,47 @@ canvas {
   border: 2px solid #c8f087;
   border-radius: 12px;
   touch-action: none;
+}
+
+.intro-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(180deg, rgba(25, 76, 43, 0.85), rgba(9, 36, 23, 0.86));
+  cursor: pointer;
+  animation: fadePulse 1.3s infinite alternate;
+}
+
+.intro-overlay.hidden {
+  display: none;
+}
+
+.intro-title {
+  margin: 0;
+  font-size: clamp(24px, 5vw, 40px);
+  font-weight: 800;
+  color: #eaffb9;
+  text-shadow: 0 2px 0 #1d4d25;
+}
+
+.intro-sub {
+  margin: 0;
+  font-size: clamp(14px, 2.3vw, 18px);
+  color: #f7ffd8;
+}
+
+@keyframes fadePulse {
+  from {
+    opacity: 0.92;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .hud {
@@ -173,16 +247,29 @@ canvas {
   font-weight: 600;
 }
 
+.restart-btn {
+  margin-top: 8px;
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: 1px solid #d5fb91;
+  background: #2f834d;
+  color: #f6ffd5;
+  font-size: 15px;
+  font-weight: 800;
+  cursor: pointer;
+  display: none;
+}
+
+.restart-btn.show {
+  display: inline-block;
+}
+
 .controls {
   margin-top: 10px;
   display: inline-flex;
-  flex-direction: column;
   gap: 6px;
-}
-
-.controls .row {
-  display: flex;
-  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .controls button {
@@ -209,4 +296,3 @@ canvas {
     display: none;
   }
 }
-

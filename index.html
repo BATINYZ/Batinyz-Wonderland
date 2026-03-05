@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="tr">
   <head>
     <meta charset="UTF-8" />
@@ -16,34 +16,44 @@
 
       <div class="playfield-wrap">
         <aside class="tree tree-left">
-          <div class="monkey monkey-a">🐵👏</div>
-          <div class="monkey monkey-b">🐒👏</div>
+          <div class="branch branch-a"></div>
+          <div class="branch branch-b"></div>
+          <div class="monkey monkey-a">&#128053;&#128079;</div>
+          <div class="monkey monkey-b">&#128018;&#128079;</div>
         </aside>
 
         <main class="board-area">
-          <canvas id="game" width="480" height="480" aria-label="Snake game"></canvas>
+          <div class="canvas-wrap">
+            <canvas id="game" width="480" height="480" aria-label="Snake game"></canvas>
+            <div id="introOverlay" class="intro-overlay">
+              <p class="intro-title">göktürk'ün için tasarlandı</p>
+              <p class="intro-sub">Ekrana tıkla ve oyunu başlat</p>
+            </div>
+          </div>
+
           <div class="hud">
             <div id="score">Skor: 0</div>
             <div id="status">Basla: Ok tuslari veya asagidaki tuslar</div>
           </div>
 
+          <button id="restartBtn" class="restart-btn" type="button">Restart</button>
+
           <div class="controls" aria-label="Mobile controls">
-            <button data-dir="up">▲</button>
-            <div class="row">
-              <button data-dir="left">◀</button>
-              <button data-dir="down">▼</button>
-              <button data-dir="right">▶</button>
-            </div>
+            <button data-dir="up">&#9650;</button>
+            <button data-dir="left">&#9664;</button>
+            <button data-dir="down">&#9660;</button>
+            <button data-dir="right">&#9654;</button>
           </div>
         </main>
 
         <aside class="tree tree-right">
-          <div class="monkey monkey-c">🐵👏</div>
-          <div class="monkey monkey-d">🐒👏</div>
+          <div class="branch branch-c"></div>
+          <div class="branch branch-d"></div>
+          <div class="monkey monkey-c">&#128053;&#128079;</div>
+          <div class="monkey monkey-d">&#128018;&#128079;</div>
         </aside>
       </div>
     </div>
     <script src="game.js"></script>
   </body>
 </html>
-

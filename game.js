@@ -1,7 +1,9 @@
-const canvas = document.getElementById("game");
+﻿const canvas = document.getElementById("game");
 const ctx = canvas.getContext("2d");
 const scoreEl = document.getElementById("score");
 const statusEl = document.getElementById("status");
+const introOverlay = document.getElementById("introOverlay");
+const restartBtn = document.getElementById("restartBtn");
 
 const grid = 20;
 const count = 24;
@@ -15,6 +17,7 @@ let nextDir;
 let food;
 let gameOver;
 let score;
+let started = false;
 
 function reset() {
   snake = [{ x: 12, y: 12 }];
@@ -26,6 +29,7 @@ function reset() {
   speed = speedStart;
   scoreEl.textContent = "Skor: 0";
   statusEl.textContent = "Yakala! Yemleri topla.";
+  restartBtn.classList.remove("show");
 }
 
 function spawnFood() {
@@ -36,6 +40,7 @@ function spawnFood() {
 }
 
 function setDirection(name) {
+  if (!started || gameOver) return;
   if (name === "up" && dir.y !== 1) nextDir = { x: 0, y: -1 };
   if (name === "down" && dir.y !== -1) nextDir = { x: 0, y: 1 };
   if (name === "left" && dir.x !== 1) nextDir = { x: -1, y: 0 };
@@ -49,12 +54,29 @@ function drawCell(x, y, color) {
   ctx.fill();
 }
 
-function drawBackground() {
+function drawAmazonBoardBackdrop() {
   const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
   gradient.addColorStop(0, "#2a6d47");
   gradient.addColorStop(1, "#19482f");
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+  ctx.globalAlpha = 0.16;
+  for (let i = 0; i < 6; i += 1) {
+    const baseX = 40 + i * 78;
+    ctx.fillStyle = "#245a34";
+    ctx.fillRect(baseX, 240, 18, 240);
+    ctx.beginPath();
+    ctx.arc(baseX + 9, 232, 38, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(baseX - 8, 248, 26, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.beginPath();
+    ctx.arc(baseX + 27, 248, 24, 0, Math.PI * 2);
+    ctx.fill();
+  }
+  ctx.globalAlpha = 1;
 
   ctx.strokeStyle = "rgba(175, 238, 120, 0.16)";
   for (let i = 0; i <= count; i += 1) {
@@ -75,7 +97,7 @@ function tick(timestamp) {
   const elapsed = timestamp - lastTime;
   if (elapsed >= speed) {
     lastTime = timestamp;
-    update();
+    if (started) update();
     draw();
   }
   requestAnimationFrame(tick);
@@ -92,7 +114,8 @@ function update() {
 
   if (wall || body) {
     gameOver = true;
-    statusEl.textContent = "Bittii! Tekrar baslamak icin Bosluk tusuna bas.";
+    statusEl.textContent = "Bitti! Restart ile yeniden baslayabilirsin.";
+    restartBtn.classList.add("show");
     return;
   }
 
@@ -110,9 +133,18 @@ function update() {
 }
 
 function draw() {
-  drawBackground();
+  drawAmazonBoardBackdrop();
+  if (!started) return;
   drawCell(food.x, food.y, "#ff7e54");
   snake.forEach((part, i) => drawCell(part.x, part.y, i === 0 ? "#dbff84" : "#93e65e"));
+}
+
+function startGame() {
+  started = true;
+  introOverlay.classList.add("hidden");
+  statusEl.textContent = "Oyun basladi!";
+  reset();
+  draw();
 }
 
 window.addEventListener("keydown", (e) => {
@@ -142,6 +174,7 @@ canvas.addEventListener("touchstart", (e) => {
   touchStartY = t.clientY;
 });
 canvas.addEventListener("touchend", (e) => {
+  if (!started || gameOver) return;
   const t = e.changedTouches[0];
   const dx = t.clientX - touchStartX;
   const dy = t.clientY - touchStartY;
@@ -149,7 +182,17 @@ canvas.addEventListener("touchend", (e) => {
   else setDirection(dy > 0 ? "down" : "up");
 });
 
+introOverlay.addEventListener("click", startGame);
+introOverlay.addEventListener("touchstart", (e) => {
+  e.preventDefault();
+  startGame();
+});
+
+restartBtn.addEventListener("click", () => {
+  reset();
+  draw();
+});
+
 reset();
 draw();
 requestAnimationFrame(tick);
-
