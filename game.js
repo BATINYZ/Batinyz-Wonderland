@@ -40,7 +40,10 @@ function reset() {
 
 function spawnFood() {
   while (true) {
-    const p = { x: Math.floor(Math.random() * count), y: Math.floor(Math.random() * count) };
+    const p = {
+      x: 1 + Math.floor(Math.random() * (count - 2)),
+      y: 1 + Math.floor(Math.random() * (count - 2))
+    };
     if (!snake.some((s) => s.x === p.x && s.y === p.y)) return p;
   }
 }
@@ -58,6 +61,51 @@ function drawCell(x, y, color) {
   ctx.beginPath();
   ctx.roundRect(x * grid + 2, y * grid + 2, grid - 4, grid - 4, 6);
   ctx.fill();
+}
+
+function drawHead(x, y) {
+  const px = x * grid + 2;
+  const py = y * grid + 2;
+  const size = grid - 4;
+  ctx.fillStyle = "#e2ff92";
+  ctx.beginPath();
+  ctx.roundRect(px, py, size, size, 7);
+  ctx.fill();
+
+  let eye1 = { x: px + 6, y: py + 6 };
+  let eye2 = { x: px + size - 6, y: py + 6 };
+  let tongueFrom = { x: px + size / 2, y: py + size / 2 };
+  let tongueTo = { x: px + size / 2, y: py - 4 };
+
+  if (dir.x === 1) {
+    eye1 = { x: px + size - 6, y: py + 6 };
+    eye2 = { x: px + size - 6, y: py + size - 6 };
+    tongueFrom = { x: px + size - 1, y: py + size / 2 };
+    tongueTo = { x: px + size + 6, y: py + size / 2 };
+  } else if (dir.x === -1) {
+    eye1 = { x: px + 6, y: py + 6 };
+    eye2 = { x: px + 6, y: py + size - 6 };
+    tongueFrom = { x: px + 1, y: py + size / 2 };
+    tongueTo = { x: px - 6, y: py + size / 2 };
+  } else if (dir.y === 1) {
+    eye1 = { x: px + 6, y: py + size - 6 };
+    eye2 = { x: px + size - 6, y: py + size - 6 };
+    tongueFrom = { x: px + size / 2, y: py + size - 1 };
+    tongueTo = { x: px + size / 2, y: py + size + 6 };
+  }
+
+  ctx.fillStyle = "#1c2b1e";
+  ctx.beginPath();
+  ctx.arc(eye1.x, eye1.y, 2.1, 0, Math.PI * 2);
+  ctx.arc(eye2.x, eye2.y, 2.1, 0, Math.PI * 2);
+  ctx.fill();
+
+  ctx.strokeStyle = "#ff8a9a";
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.moveTo(tongueFrom.x, tongueFrom.y);
+  ctx.lineTo(tongueTo.x, tongueTo.y);
+  ctx.stroke();
 }
 
 function drawAmazonBoardBackdrop() {
@@ -143,7 +191,10 @@ function draw() {
   drawAmazonBoardBackdrop();
   if (!started) return;
   drawCell(food.x, food.y, "#ff7e54");
-  snake.forEach((part, i) => drawCell(part.x, part.y, i === 0 ? "#dbff84" : "#93e65e"));
+  snake.forEach((part, i) => {
+    if (i === 0) drawHead(part.x, part.y);
+    else drawCell(part.x, part.y, "#93e65e");
+  });
 }
 
 function tone(freq, duration, type = "square", volume = 0.03, when = 0) {
