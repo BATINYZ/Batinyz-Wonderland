@@ -169,12 +169,13 @@ function initAudio() {
 function startMusic() {
   if (musicTimer) clearInterval(musicTimer);
   musicTimer = setInterval(() => {
+    if (audioCtx && audioCtx.state === "suspended") audioCtx.resume();
     const m = melody[noteIndex % melody.length];
     const b = bass[noteIndex % bass.length];
-    tone(m, 0.14, "square", 0.03, 0);
-    tone(b, 0.18, "triangle", 0.02, 0.01);
+    tone(m, 0.16, "square", 0.07, 0);
+    tone(b, 0.2, "triangle", 0.05, 0.01);
     noteIndex += 1;
-  }, 210);
+  }, 190);
 }
 
 function deathSound() {
@@ -185,6 +186,7 @@ function deathSound() {
 }
 
 function startGame() {
+  if (started) return;
   initAudio();
   startMusic();
   started = true;
@@ -209,7 +211,7 @@ document.querySelectorAll(".controls button").forEach((btn) => {
   btn.addEventListener("touchstart", (e) => {
     e.preventDefault();
     setDirection(btn.dataset.dir);
-  });
+  }, { passive: false });
   btn.addEventListener("click", () => setDirection(btn.dataset.dir));
 });
 
@@ -233,7 +235,7 @@ introOverlay.addEventListener("click", startGame);
 introOverlay.addEventListener("touchstart", (e) => {
   e.preventDefault();
   startGame();
-});
+}, { passive: false });
 
 restartBtn.addEventListener("click", () => {
   reset();
